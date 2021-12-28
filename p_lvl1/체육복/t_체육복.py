@@ -12,6 +12,7 @@ if any(x in c for x in (a,b)):
 
 any함수를 사용하여 논리식을 펼친다 (전체는 all() 함수)
 """
+"""테스트 85/100으로 실패 """
 
 def check_reserve(num, reserve):
     if num in reserve:
