@@ -15,7 +15,7 @@ def solution(num):
 
 """
 functools중에 cmp_to_key(함수)를 이용해서 푼 풀이이다
-
+cpm_to_key()는 배열 안에 있는 인자를 비교해주는 sorted()의 key 비교함수이다
 """
 
 
