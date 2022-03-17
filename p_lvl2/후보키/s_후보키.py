@@ -1,8 +1,5 @@
 
 
-
-
-
 """
 사용한 논리:
 1~리스트 길이만큼의 범위를 조합으로 구한다
@@ -26,10 +23,8 @@ def solution(relation):
     combi = []
     for i in range(1, col+1):
         combi.extend(combinations(range(col), i))
-    """
-    [(0,), (1,), (2,), (3,), (0, 1), (0, 2), (0, 3), (1, 2), (1, 3), 
-    (2, 3), (0, 1, 2), (0, 1, 3), (0, 2, 3), (1, 2, 3), (0, 1, 2, 3)]
-    """
+    
+    
     #유일성
     unique = []
     for i in combi:
