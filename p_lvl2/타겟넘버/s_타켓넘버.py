@@ -43,7 +43,6 @@ def solution(numbers, target):
 1을 반환하여서 +와-인 경우의 수를 모두 고려한 값이 최종적으로 반환된다
 """
 
-
 def solution(numbers, target):
     if not numbers and target == 0 :
         return 1
