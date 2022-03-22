@@ -7,7 +7,6 @@ dictionary를 사용하여 괄호의 조합을 맞춘다
 """
 
 
-
 def solution(s):
     answer = 0
     dic = {'{':'}', '[':']', '(':')'}
