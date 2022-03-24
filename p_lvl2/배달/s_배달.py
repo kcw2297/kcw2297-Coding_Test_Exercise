@@ -11,19 +11,18 @@ dijkstra 알고리즘으로 최단거리인경우 push를 한후 그 거리를 �
 """
 
 
-
-import heapq
+from collections import deque
 
 def dijkstra(dist,adj):
-    # 출발노드를 기준으로 각 노드들의 최소비용 탐색
-    heap = []
-    heapq.heappush(heap, [0,1])  # 거리,노드
-    while heap:
-        cost, node = heapq.heappop(heap) # 처음 시작은 자기자신으로 0과 1번 노드
-        for c,n in adj[node]: # adj 변수에 저장된 1번과 근전한 노드와 거리를 반환
+    deq = deque()
+    deq.append([0,1])
+    while deq:
+        cost, node = deq.pop()
+        for c,n in adj[node]:
             if cost+c < dist[n]:
-                dist[n] = cost+c # [inf, 0, 1, inf, inf, inf, inf]
-                heapq.heappush(heap, [cost+c,n])
+                dist[n] = cost+c
+                deq.append([cost+c,n])
+
 
 
 def solution(N, road, K):

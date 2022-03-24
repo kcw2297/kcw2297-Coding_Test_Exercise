@@ -23,3 +23,4 @@ def solution(N, road, K):
 
         n_road[dist[0]].append({dist[1]:dist[2]}) #{1:[{2:3},{4:1}]}
     
+
