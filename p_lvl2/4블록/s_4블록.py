@@ -1,4 +1,15 @@
 
+"""
+사용한 논리:
+기존의 테이블에서 행과열을 뒤집어 하나의 리스트로 관리 가능하게 바꾼다
+*이때 zip(*board)는 iterable 객체를 나눌때 사용된다
+set와 |= 연산자를 이용해 조건에 맞는 범위를 저장한다
+조건에 해당하는 사각형을 0으로 전환 후에 해당 자리만큼 리스트 뒤로 간다
+마지막으로 pop_set의 길이를 전환하는데 0이 아닌경우 count에 값을 더한 후
+다시 반복하고, 0이면 count를 반환한다
+"""
+
+
 # 뒤집어서 n 높이, m 폭
 def pop_num(b, m, n):
     pop_set = set()
@@ -14,7 +25,7 @@ def pop_num(b, m, n):
         empty = ['_'] * row.count(0) # 각 열의 0인 개수 == "_"
         b[i] = empty + [block for block in row if block != 0] # [_,_,F,T]
     return len(pop_set)
-
+ 
 def solution(m, n, board):
     count = 0
     b = list(map(list,zip(*board)))
