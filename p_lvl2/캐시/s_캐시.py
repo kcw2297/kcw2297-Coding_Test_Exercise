@@ -32,3 +32,28 @@ def solution(cacheSize, cities):
 
             buffer.append(i)
     return answer
+
+
+
+
+
+
+"""
+deque의 속성 중에 maxlen을 이용해 버터의 최대치를 설저 할 수 있다
+"""
+
+def solution(cacheSize, cities):
+    import collections
+    cache = collections.deque(maxlen=cacheSize)
+    time = 0
+    for i in cities:
+        s = i.lower()
+        if s in cache:
+            cache.remove(s)
+            cache.append(s)
+            time += 1
+        else:
+            cache.append(s)
+            time += 5
+    return time
+
