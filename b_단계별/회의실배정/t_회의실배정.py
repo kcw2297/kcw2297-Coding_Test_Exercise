@@ -35,4 +35,27 @@ for meeting in total:
         manage.append(me)
 
 
+"""/////////////////////////////////////////////////"""
+
+
+n = int(input())
+times = []
+for _ in range(n):
+    a, b = map(int,input().split())
+    times.append([a,b])
+
+times = sorted(times, key= lambda x: x[0])
+times = sorted(times, key= lambda x: x[1])
+
+
+
+start = 0
+count = 0
+
+for i, j in times:
+    if i >= start:
+        count += 1
+        start = j
+    
+print(count)
 
