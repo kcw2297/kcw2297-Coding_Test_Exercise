@@ -13,6 +13,8 @@
 *위에 정리한 논리대로 구현을 하였지만 시간초과로 인한 효율성에 막혔다
 -while문과 for문을 중첩하여서 O(n^2)를 만들었다 (replace가 1개의 문자만 변형하는 줄 안 실수이다)
 -for문 안에 while문을 또 사용하여 O(n^2)를 만들었다 (마찬가지로 replace가 1개의 문자만 변형하는 줄 안 실수이다)
+70/100점 받은 것으로 특정 논리가 틀렸거나 포함을 안시켰다
+*시간순으로 반환하는 부분에서 조건이 틀린것으로 예상된다
 """
 
 def check(m, rhythm):
@@ -25,11 +27,8 @@ def check(m, rhythm):
 def solution(m, musicinfos):
 
     # '#'이 있는 동안에는 for문을 이용해 해당 인덱스의 음을 소문자로 변환한다
-    while '#' in m:
-        for idx in range(len(m)):
-            if m[idx] == '#':
-                m.replace(m[idx-1:idx+1], m[idx].lower())
-            break
+    m = m.replace("C#", "c").replace("D#", "d").replace("F#", "f").replace("G#", "g").replace("A#", "a")
+
     
     infos = []
     
@@ -46,11 +45,8 @@ def solution(m, musicinfos):
 
         total_word = separate[-1]*(repeat // len(separate[-1])) + separate[-1][:(repeat % len(separate[-1]))]
 
-        while '#' in total_word:
-            for idx in range(len(total_word)):
-                if total_word[idx] == '#':
-                    total_word.replace(total_word[idx-1:idx+1], total_word[idx].lower())
-                break
+        total_word = total_word.replace("C#", "c").replace("D#", "d").replace("F#", "f").replace("G#", "g").replace("A#", "a")
+
         
         # append(time, name, rhythm)
         infos.append([repeat ,separate[2], total_word])

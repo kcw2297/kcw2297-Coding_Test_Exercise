@@ -1,6 +1,12 @@
 
 
+"""
+모든 조건문들을 마지막에 or로 표시함으로써 코드의 오류를 줄이고 가독성을 높혔다
+or과 and의 적용 순서를 적절히 배치하여 모든 조건을 만족한다
 
+항상 split한 값을 새로운 리스트에 저장하여 메모리 효율성을 떨여트렸는데,
+이를 고려한 공간 효율성까지 높이는 습관을 들이자
+"""
 
 import math
 
@@ -37,7 +43,7 @@ def solution(m, musicinfos):
 
 """
 사용한 논리:
-
+사용한 논리는 동일하지만 공간 메모리 사용에서 훨씬 효율적으로 작성된  코드이다
 """
 
 
@@ -57,3 +63,4 @@ def solution(m,musicinfos):
         if m in full_notes and time_length>answer[0]:
             answer=[time_length,title]
     return answer[-1]
+
