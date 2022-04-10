@@ -1,65 +1,64 @@
-import gc
 
-from requests import delete
+
 
 class Node:
-    def __init__(self,data):
-        self.data = data
-        self.next = None
-        self.prev = None
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+def insert(node, key):
+    if node is None:
+        return Node(key)
+
+    if node.key == key:
+        return "Cannot have duplicate number"
+
+    if node.key < key:
+        node.right = insert(node.right, key)
+    if node.key > key:
+        node.left = insert(node.left, key)
+
+    return node
+
+def minValueNode(node):
+    current = node
+
+    while current.left is not None:
+        current = current.left
+
+    return current
 
 
-class DoublyLinkedList:
-    def __init__(self):
-        self.head = None
-
-    def push(self, value):
-        newNode = Node(value)
-        newNode.next = self.head
-
-        if self.head != None:
-            self.head.prev = newNode
+def deleteNode(root, key):
+    
+    # tree의 마지막 node에 도달(base case)
+    if root is None:
+        return root
+    
+    # 왼쪽 branch 조사
+    if key < root.key:
+        root.left = deleteNode(root.left, key)
+    
+    # 오른쪽 branch 조사
+    elif key > root.key:
+        root.right = deleteNode(root.right, key)
+    
+    else:
+        # 해당 root를 삭제해야하는 경우 및 자식 노드가 1개이거나 없는 경우
+        if root.left is None:
+            temp = root.right
+            root = None
+            return temp 
         
-        self.head = newNode
+        elif root.right is None:
+            temp = root.left
+            root = None
+            return temp
+        
+        # 가장 최상단의 root가 삭제해야하는 경우
+        temp = minValueNode(root.right)
+        root.key = temp.key
+        root.right = deleteNode(root.right, temp.key)
 
-    def append(self, value):
-        newNode = Node(value)
-
-
-        last = self.head
-        while last.next:
-            last = last.next
-
-        last.next = newNode
-        newNode.prev = last
-
-    def insertAfter(self, prev_node, value):
-        newNode = Node(value)
-
-        newNode.next = prev_node.next
-        prev_node.next.prev = newNode
-        newNode.prev = prev_node
-        prev_node.next = newNode
-
-    def deleteNode(self, dele):
-        if self.head == dele:
-            self.head = self.next
-
-        if dele.next is not None:
-            dele.next.prev = dele.next
-
-        if dele.prev is not None:
-            dele.prev.next = dele.next
-
-    def reverse(self):
-        temp = None
-        current = self.head
-
-        while current is not None:
-            temp = current.prev
-            current.prev = current.next
-            current.next = temp
-            current = current.prev
-
-        if temp is not None:
-            self.head = temp.prev
+    return root

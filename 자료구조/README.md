@@ -1,5 +1,7 @@
 ## 자료구조/알고리즘 총 복습
-
+최종 복습한 내용으로 대표적인 자료구조/알고리즘 유형들을 정리하였습니다
+자료구조: Array, Hash Tables, Hash Tables, Linked List, Stack, Queues, Trees, Graphs
+알고리즘: Recursion, Sorting, BFS, DFS, Dynamic Programming
 
 ### Big O
 ![big0] (./bigo.png)
@@ -30,7 +32,7 @@
 -delete : o(1)
 -search : o(1)
 
-장점 : 
+장점 : 시간효율성이 빠른다
 단점 : hash collision이 발생시 overflow가 발생한다. 하나의 메모리 주소에 여러 
 값이 설정되어 있다면 O(n)이 발생할 수 있다
 
@@ -45,6 +47,43 @@
 단점 : lookup이 느리고 메모리를 많이 차지한다
 
 
+
+### Stack
+-lookup : o(n)
+-pop : o(1)
+-push : o(1)
+-peek : o(1)
+
+장점 : 빠른 실행, peek이 빠르다, 순서가 있다
+단점 : lookup이 느리다
+
+### Queue
+-lookup : o(n)
+-enqueue : o(1)
+-dequeue : o(1)
+-peek : o(1)
+
+장점 : 빠른 실행, peek이 빠르다, 순서가 있다
+단점 : lookup이 느리다
+
+### Tree
+-lookup : o(logN)
+-insert : o(logN)
+-delete : o(logN)
+
+장점 : O(n)보다 빠르다, 순서가 있다, 확장성이 있다
+단점 : O(1)인 것이 없다
+*unbalanced인 경우 최악의 경우 O(n)일수도 있지만 balance를 하고 search를 해도 O(N)보다 빠르다
+
+
+### 
+-lookup : o()
+-push : o()
+-insert : o()
+-delete : o()
+
+장점 : 
+단점 : 
 
 ### 
 -lookup : o()

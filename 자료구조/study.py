@@ -633,7 +633,7 @@ print()
 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# BST(binary search tree)
+# BST(binary search tree) https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
 
 class Node:
 
@@ -691,7 +691,7 @@ def minValueNode(node):
 
 def deleteNode(root, key):
 
-    # Base Case
+    # 만약 root가 None이 경우는, tree의 마지막 node에 도달
     if root is None:
         return root
 
@@ -710,7 +710,7 @@ def deleteNode(root, key):
     # If key is same as root's key, then this is the node
     # to be deleted
     else:
-
+        # 해당 root.key가 삭제하려고 할 때
         # Node with only one child or no child
         if root.left is None:
             temp = root.right
@@ -725,6 +725,7 @@ def deleteNode(root, key):
         # Node with two children:
         # Get the inorder successor
         # (smallest in the right subtree)
+        # 이 경우는 지우려고 하는 것이 root.key인 경우
         temp = minValueNode(root.right)
 
         # Copy the inorder successor's
