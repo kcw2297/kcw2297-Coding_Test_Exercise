@@ -76,14 +76,11 @@
 *unbalanced인 경우 최악의 경우 O(n)일수도 있지만 balance를 하고 search를 해도 O(N)보다 빠르다
 
 
-### 
--lookup : o()
--push : o()
--insert : o()
--delete : o()
+### AVL Tree
 
-장점 : 
-단점 : 
+특징 : Tree가 unbalance된 경우, O(n)이 될 수도 있지만, avl 알고리즘으로 balance를 맞춘다
+-높이가 2이상이 안되게한다
+-ll, rr, lr, rl rotation으로 각 노드를 전환시킨다
 
 ### 
 -lookup : o()

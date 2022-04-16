@@ -572,10 +572,8 @@ class AVLTree(object):
 		y.l = z
 		z.r = T2
 
-		z.h = 1 + max(self.getHeight(z.l),
-						self.getHeight(z.r))
-		y.h = 1 + max(self.getHeight(y.l),
-						self.getHeight(y.r))
+		z.h = 1 + max(self.getHeight(z.l), self.getHeight(z.r))
+		y.h = 1 + max(self.getHeight(y.l), self.getHeight(y.r))
 
 		return y
 
@@ -587,10 +585,8 @@ class AVLTree(object):
 		y.r = z
 		z.l = T3
 
-		z.h = 1 + max(self.getHeight(z.l),
-						self.getHeight(z.r))
-		y.h = 1 + max(self.getHeight(y.l),
-						self.getHeight(y.r))
+		z.h = 1 + max(self.getHeight(z.l), self.getHeight(z.r))
+		y.h = 1 + max(self.getHeight(y.l), self.getHeight(y.r))
 
 		return y
 

@@ -1,64 +1,96 @@
+class treeNode(object):
+    def __init__(self, value):
+        self.value = value
+        self.l = None
+        self.r = None
+        self.h = 1
 
 
+class AVLTree(object):
+    def insert(self, root, key):
+        if not root:
+            return treeNode(key)
+        elif key < root.value:
+            root.l = self.insert(root.l, key)
+        else:
+            root.r = self.insert(root.r, key)
 
-class Node:
-    def __init__(self, key):
-        self.key = key
-        self.left = None
-        self.right = None
+        root.h = 1 + max(self.getHeight(root.l), self.getHeight(root.r))
 
-def insert(node, key):
-    if node is None:
-        return Node(key)
+        b = self.getBal(root)
 
-    if node.key == key:
-        return "Cannot have duplicate number"
+        if b > 1 and key < root.l.value:
+            return self.rRotate(root)
 
-    if node.key < key:
-        node.right = insert(node.right, key)
-    if node.key > key:
-        node.left = insert(node.left, key)
+        if b < -1 and key > root.r.value:
+            return self.lRotate(root)
 
-    return node
+        if b > 1 and key > root.l.value:
+            root.l = self.lRotate(root.l)
+            return self.rRotate(root)
 
-def minValueNode(node):
-    current = node
+        if b < -1 and key < root.r.value:
+            root.r = self.rRotate(root.r)
+            return self.lRotate(root)
 
-    while current.left is not None:
-        current = current.left
-
-    return current
-
-
-def deleteNode(root, key):
-    
-    # tree의 마지막 node에 도달(base case)
-    if root is None:
         return root
-    
-    # 왼쪽 branch 조사
-    if key < root.key:
-        root.left = deleteNode(root.left, key)
-    
-    # 오른쪽 branch 조사
-    elif key > root.key:
-        root.right = deleteNode(root.right, key)
-    
-    else:
-        # 해당 root를 삭제해야하는 경우 및 자식 노드가 1개이거나 없는 경우
-        if root.left is None:
-            temp = root.right
-            root = None
-            return temp 
-        
-        elif root.right is None:
-            temp = root.left
-            root = None
-            return temp
-        
-        # 가장 최상단의 root가 삭제해야하는 경우
-        temp = minValueNode(root.right)
-        root.key = temp.key
-        root.right = deleteNode(root.right, temp.key)
 
-    return root
+
+    def lRotate(self, z):
+        y = z.r
+        temp = y.l
+
+        y.l = z
+        z.r = temp
+
+        z.h = 1 + max(self.getHeight(z.l), self.getHeight(z.r))
+        y.h = 1 + max(self.getHeight(y.l), self.getHeight(y.r))
+
+        return y
+
+    def rRotate(self, z):
+        y = z.l
+        temp = y.r
+
+        y.r = z
+        z.l = temp
+
+        z.h = 1 + max(self.getHeight(z.l), self.getHeight(z.r))
+        y.h = 1 + max(self.getHeight(y.l), self.getHeight(y.r))
+
+        return y
+
+    def getHeight(self, root):
+        if not root:
+            return 0
+        return root.h
+
+    def getBal(self, root):
+        if not root:
+            return 0
+        return self.getHeight(root.l) - self.getHeight(root.r)
+
+    def preOrder(self, root):
+        if not root:
+            return
+        
+        print("{0} ".format(root.value), end='')
+        self.preOrder(root.l)
+        self.preOrder(root.l)
+
+
+Tree = AVLTree()
+root = None
+
+root = Tree.insert(root, 1)
+root = Tree.insert(root, 2)
+root = Tree.insert(root, 3)
+root = Tree.insert(root, 4)
+root = Tree.insert(root, 5)
+root = Tree.insert(root, 6)
+
+# Preorder Traversal
+print("Preorder traversal of the",
+	"constructed AVL tree is")
+Tree.preOrder(root)
+print()
