@@ -1,7 +1,10 @@
 
 
 
+"""
+사용한 논리:
 
+"""
 
 from sys import stdin
 _ = stdin.readline()
