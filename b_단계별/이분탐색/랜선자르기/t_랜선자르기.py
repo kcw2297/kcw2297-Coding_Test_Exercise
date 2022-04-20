@@ -7,23 +7,56 @@
 반복문과 몫을 이용해 풀이한 모습이다
 """
 
+# import sys
+
+# K, N = map(int, sys.stdin.readline().split())
+# num_list = [int(sys.stdin.readline()) for _ in range(K)] 
+
+# start, end = 1, max(num_list)
+
+# while start <= end:
+#     mid = (start+end)//2
+#     lines = 0
+#     for i in num_list:
+#         lines += i//mid
+
+#     if lines >= N:
+#         start = mid + 1
+#     else:
+#         end = mid - 1
+
+# print(end)
+
+
+"""
+4 11
+802
+743
+457
+539
+"""
+
+
 import sys
 
-K, N = map(int, sys.stdin.readline().split())
-num_list = [int(sys.stdin.readline()) for _ in range(K)] 
+M, N = map(int, sys.stdin.readline.split())
+# nums = []
+# for i in range(M):
+#     nums.append(int(sys.stdin.readline))
+nums = [int(sys.stdin.readline()) for _ in range(M)]
 
-start, end = 1, max(num_list)
+start, end = 1, max(nums)
 
-while start <= end:
-    mid = (start+end)//2
-    lines = 0
-    for i in num_list:
-        lines += i//mid
+while start <=end:
+    mid = (start + end) // 2
+    count = 0
 
-    if lines >= N:
+    for ele in nums:
+        count += ele // mid
+    
+    if count >= N:
         start = mid + 1
-    else:
+    elif count < N:
         end = mid - 1
 
 print(end)
-    
