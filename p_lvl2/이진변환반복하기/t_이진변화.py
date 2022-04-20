@@ -7,6 +7,9 @@
 """    
 
 
+from math import remainder
+
+
 def zero_check(s, total,repeat):
     if len(s) < 1:
         return total, repeat
@@ -28,3 +31,8 @@ def solution(s):
     repeat=0
     count_z, repeat = zero_check(s, count_z,repeat)
     return [repeat, count_z]
+
+
+
+
+
