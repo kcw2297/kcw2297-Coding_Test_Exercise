@@ -1,96 +1,95 @@
-class treeNode(object):
-    def __init__(self, value):
-        self.value = value
-        self.l = None
-        self.r = None
-        self.h = 1
 
+import sys
+class MinHeap:
 
-class AVLTree(object):
-    def insert(self, root, key):
-        if not root:
-            return treeNode(key)
-        elif key < root.value:
-            root.l = self.insert(root.l, key)
-        else:
-            root.r = self.insert(root.r, key)
+    def __init__(self, maxsize):
+        self.maxsize = maxsize
+        self.size = 0
+        self.Heap = [0]*(self.maxsize + 1)
+        self.Heap[0] = -1 * sys.maxsize
+        self.FRONT = 1
 
-        root.h = 1 + max(self.getHeight(root.l), self.getHeight(root.r))
-
-        b = self.getBal(root)
-
-        if b > 1 and key < root.l.value:
-            return self.rRotate(root)
-
-        if b < -1 and key > root.r.value:
-            return self.lRotate(root)
-
-        if b > 1 and key > root.l.value:
-            root.l = self.lRotate(root.l)
-            return self.rRotate(root)
-
-        if b < -1 and key < root.r.value:
-            root.r = self.rRotate(root.r)
-            return self.lRotate(root)
-
-        return root
-
-
-    def lRotate(self, z):
-        y = z.r
-        temp = y.l
-
-        y.l = z
-        z.r = temp
-
-        z.h = 1 + max(self.getHeight(z.l), self.getHeight(z.r))
-        y.h = 1 + max(self.getHeight(y.l), self.getHeight(y.r))
-
-        return y
-
-    def rRotate(self, z):
-        y = z.l
-        temp = y.r
-
-        y.r = z
-        z.l = temp
-
-        z.h = 1 + max(self.getHeight(z.l), self.getHeight(z.r))
-        y.h = 1 + max(self.getHeight(y.l), self.getHeight(y.r))
-
-        return y
-
-    def getHeight(self, root):
-        if not root:
-            return 0
-        return root.h
-
-    def getBal(self, root):
-        if not root:
-            return 0
-        return self.getHeight(root.l) - self.getHeight(root.r)
-
-    def preOrder(self, root):
-        if not root:
+    def insert(self, element):
+        if self.size >= self.maxsize :
             return
-        
-        print("{0} ".format(root.value), end='')
-        self.preOrder(root.l)
-        self.preOrder(root.l)
+        self.size+= 1
+        self.Heap[self.size] = element
+ 
+        current = self.size
+ 
+        while self.Heap[current] < self.Heap[self.parent(current)]:
+            self.swap(current, self.parent(current))
+            current = self.parent(current)
+
+    def remove(self):
+        popped = self.Heap(self.FRONT)
+        self.Heap[self.FRONT] = self.Heap[self.size]
+        self.size -= 1
+        self.minHeapify(self.FRONT)
+        return popped
 
 
-Tree = AVLTree()
-root = None
+    #[0,1,2,3,4,5,6,7,8]
 
-root = Tree.insert(root, 1)
-root = Tree.insert(root, 2)
-root = Tree.insert(root, 3)
-root = Tree.insert(root, 4)
-root = Tree.insert(root, 5)
-root = Tree.insert(root, 6)
 
-# Preorder Traversal
-print("Preorder traversal of the",
-	"constructed AVL tree is")
-Tree.preOrder(root)
-print()
+    # Function to return the position of
+    # parent for the node currently
+    # at pos
+    def parent(self, pos):
+        return pos//2
+ 
+    # Function to return the position of
+    # the left child for the node currently
+    # at pos
+    def leftChild(self, pos):
+        return 2 * pos
+ 
+    # Function to return the position of
+    # the right child for the node currently
+    # at pos
+    def rightChild(self, pos):
+        return (2 * pos) + 1
+
+    # Function that returns true if the passed
+    # node is a leaf node
+    def isLeaf(self, pos):
+        return pos*2 > self.size
+
+    # Function to swap two nodes of the heap
+    def swap(self, fpos, spos):
+        self.Heap[fpos], self.Heap[spos] = self.Heap[spos], self.Heap[fpos]
+
+    # Function to heapify the node at pos
+    def minHeapify(self, pos):
+ 
+        # If the node is a non-leaf node and greater
+        # than any of its child
+        if not self.isLeaf(pos):
+            if (self.Heap[pos] > self.Heap[self.leftChild(pos)] or
+               self.Heap[pos] > self.Heap[self.rightChild(pos)]):
+ 
+                # Swap with the left child and heapify
+                # the left child
+                if self.Heap[self.leftChild(pos)] < self.Heap[self.rightChild(pos)]:
+                    self.swap(pos, self.leftChild(pos))
+                    self.minHeapify(self.leftChild(pos))
+ 
+                # Swap with the right child and heapify
+                # the right child
+                else:
+                    self.swap(pos, self.rightChild(pos))
+                    self.minHeapify(self.rightChild(pos))
+
+    # Function to print the contents of the heap
+    def Print(self):
+        for i in range(1, (self.size//2)+1):
+            print(" PARENT : "+ str(self.Heap[i])+" LEFT CHILD : "+
+                                str(self.Heap[2 * i])+" RIGHT CHILD : "+
+                                str(self.Heap[2 * i + 1]))
+ 
+    # Function to build the min heap using
+    # the minHeapify function
+    def minHeap(self):
+ 
+        for pos in range(self.size//2, 0, -1):
+            self.minHeapify(pos)

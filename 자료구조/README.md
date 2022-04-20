@@ -82,23 +82,23 @@
 -높이가 2이상이 안되게한다
 -ll, rr, lr, rl rotation으로 각 노드를 전환시킨다
 
-### 
--lookup : o()
--push : o()
--insert : o()
--delete : o()
+장점 : 빠른 search와 strictly balanced
+단점 : 각 노드에 좌우 및 height 정보를 요구
 
-장점 : 
-단점 : 
+### Red Black Tree
 
-### 
--lookup : o()
--push : o()
--insert : o()
--delete : o()
+특징: AVL과 마찬가지로 트리의 균형을 위해 사용된다.
+위 avl과의 차이점은 strictly하게 균현을 잡지 않는 점이다. 즉 모든 height이 
+2 미만이지 않는다. 즉 모든 avl tree가 red black tree과 같지 않다.
 
-장점 : 
-단점 : 
+장점 : 빠른 insertion과 deleteion
+단점 : searching에는 효율적이지 않는다.
+
+### Binary Heap (min/max)
+-Time Complexity : log(n)
+
+특징: 최소/최댓값을 빠르게 찾기 위해 구현된 알고리즘으로 root에 최소/최댓값이 있다. 또한 배열 상태로 저장이 가능하여 정렬이 필요없다. 
+
 
 ### 
 -lookup : o()

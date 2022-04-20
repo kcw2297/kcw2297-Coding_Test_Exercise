@@ -271,60 +271,121 @@ trie.search("app");     #return True
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# Binary Heap
-from heapq import heappush, heappop, heapify 
-
-# A class for Min Heap
+# Binary Heap https://www.geeksforgeeks.org/min-heap-in-python/
+import sys
+ 
 class MinHeap:
-
-    # Constructor to initialize a heap
-    def __init__(self):
-        self.heap = [] 
-
-    def parent(self, i):
-        return (i-1)/2
-
-    # Inserts a new key 'k'
-    def insertKey(self, k):
-        heappush(self.heap, k)           
-
-    # Decrease value of key at index 'i' to new_val
-    # It is assumed that new_val is smaller than heap[i]
-    def decreaseKey(self, i, new_val):
-        self.heap[i]  = new_val 
-        while(i != 0 and self.heap[self.parent(i)] > self.heap[i]):
-            # Swap heap[i] with heap[parent(i)]
-            self.heap[i] , self.heap[self.parent(i)] = (
-            self.heap[self.parent(i)], self.heap[i])
-
-    # Method to remove minium element from min heap
-    def extractMin(self):
-        return heappop(self.heap)
-
-    # This functon deletes key at index i. It first reduces
-    # value to minus infinite and then calls extractMin()
-    def deleteKey(self, i):
-        self.decreaseKey(i, float("-inf"))
-        self.extractMin()
-
-    # Get the minimum element from the heap
-    def getMin(self):
-        return self.heap[0]
-
-# Driver pgoratm to test above function
-heapObj = MinHeap()
-heapObj.insertKey(3)
-heapObj.insertKey(2)
-heapObj.deleteKey(1)
-heapObj.insertKey(15)
-heapObj.insertKey(5)
-heapObj.insertKey(4)
-heapObj.insertKey(45)
-
-print(heapObj.extractMin()),
-print(heapObj.getMin()),
-heapObj.decreaseKey(2, 1)
-print(heapObj.getMin()),
+ 
+    def __init__(self, maxsize):
+        self.maxsize = maxsize
+        self.size = 0
+        self.Heap = [0]*(self.maxsize + 1)
+        self.Heap[0] = -1 * sys.maxsize
+        self.FRONT = 1
+ 
+    # Function to return the position of
+    # parent for the node currently
+    # at pos
+    def parent(self, pos):
+        return pos//2
+ 
+    # Function to return the position of
+    # the left child for the node currently
+    # at pos
+    def leftChild(self, pos):
+        return 2 * pos
+ 
+    # Function to return the position of
+    # the right child for the node currently
+    # at pos
+    def rightChild(self, pos):
+        return (2 * pos) + 1
+ 
+    # Function that returns true if the passed
+    # node is a leaf node
+    def isLeaf(self, pos):
+        return pos*2 > self.size
+ 
+    # Function to swap two nodes of the heap
+    def swap(self, fpos, spos):
+        self.Heap[fpos], self.Heap[spos] = self.Heap[spos], self.Heap[fpos]
+ 
+    # Function to heapify the node at pos
+    def minHeapify(self, pos):
+ 
+        # If the node is a non-leaf node and greater
+        # than any of its child
+        if not self.isLeaf(pos):
+            if (self.Heap[pos] > self.Heap[self.leftChild(pos)] or
+               self.Heap[pos] > self.Heap[self.rightChild(pos)]):
+ 
+                # Swap with the left child and heapify
+                # the left child
+                if self.Heap[self.leftChild(pos)] < self.Heap[self.rightChild(pos)]:
+                    self.swap(pos, self.leftChild(pos))
+                    self.minHeapify(self.leftChild(pos))
+ 
+                # Swap with the right child and heapify
+                # the right child
+                else:
+                    self.swap(pos, self.rightChild(pos))
+                    self.minHeapify(self.rightChild(pos))
+ 
+    # Function to insert a node into the heap
+    def insert(self, element):
+        if self.size >= self.maxsize :
+            return
+        self.size+= 1
+        self.Heap[self.size] = element
+ 
+        current = self.size
+ 
+        while self.Heap[current] < self.Heap[self.parent(current)]:
+            self.swap(current, self.parent(current))
+            current = self.parent(current)
+ 
+    # Function to print the contents of the heap
+    def Print(self):
+        for i in range(1, (self.size//2)+1):
+            print(" PARENT : "+ str(self.Heap[i])+" LEFT CHILD : "+
+                                str(self.Heap[2 * i])+" RIGHT CHILD : "+
+                                str(self.Heap[2 * i + 1]))
+ 
+    # Function to build the min heap using
+    # the minHeapify function
+    def minHeap(self):
+ 
+        for pos in range(self.size//2, 0, -1):
+            self.minHeapify(pos)
+ 
+    # Function to remove and return the minimum
+    # element from the heap
+    def remove(self):
+ 
+        popped = self.Heap[self.FRONT]
+        self.Heap[self.FRONT] = self.Heap[self.size]
+        self.size-= 1
+        self.minHeapify(self.FRONT)
+        return popped
+ 
+# Driver Code
+if __name__ == "__main__":
+     
+    print('The minHeap is ')
+    minHeap = MinHeap(15)
+    minHeap.insert(5)
+    minHeap.insert(3)
+    minHeap.insert(17)
+    minHeap.insert(10)
+    minHeap.insert(84)
+    minHeap.insert(19)
+    minHeap.insert(6)
+    minHeap.insert(22)
+    minHeap.insert(9)
+    minHeap.minHeap()
+ 
+    minHeap.Print()
+    print("The Min val is " + str(minHeap.remove()))
 
 
 
@@ -336,7 +397,7 @@ Rules:
 root is always black
 new node is always red
 every path from root has same num of black nodes
-no path can 2 consecutive red nodes
+no path can have 2 consecutive red nodes
 null is black
 Rebalance:
 black aunt rotate => after rotate, parent => black, children => red
