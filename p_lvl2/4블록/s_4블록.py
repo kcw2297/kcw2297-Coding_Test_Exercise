@@ -75,3 +75,5 @@ def solution(m, n, board):
     for i in x2:
         cnt += i.count('팡!')
     return cnt
+
+
