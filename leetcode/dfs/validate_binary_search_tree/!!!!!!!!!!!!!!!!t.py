@@ -1,7 +1,30 @@
 
 
 
+class Solution:
+    def __init__(self):
+        self.flag = True
+        self.curr = float("-inf")
     
+    def isValidBST(self, root):
+        if root is None: 
+            return 
+
+        self.isValidBST(root.left)
+
+        if root.val <= self.curr:
+            self.flag = False
+
+        self.curr = root.val
+
+        self.isValidBST(root.right)
+
+        return self.flag
+
+
+    
+
+
     
     
     

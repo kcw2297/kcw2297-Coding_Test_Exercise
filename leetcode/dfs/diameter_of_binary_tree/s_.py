@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+    def diameterOfBinaryTree(self, root) -> int:
         if root is None: return 0
     
         result = 0
@@ -35,7 +35,7 @@ class Solution:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+    def diameterOfBinaryTree(self, root) -> int:
         if root is None: return 0
     
         result = 0
