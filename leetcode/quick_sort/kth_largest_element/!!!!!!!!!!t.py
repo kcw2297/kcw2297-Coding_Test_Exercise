@@ -2,48 +2,33 @@
 
 
 class Solution:
-    def findKthLargest(self, nums, k):
-        sorted = self.quicksort(nums)
-        return sorted[len(nums)-k]
     
-    def quicksort(self, nums):
-        if len(nums) == 1 or nums == None: return
+    def findKthLargest(self, nums, k):
+        k = len(nums) - k
+        return self.quickSelect(nums,0,len(nums)-1,k)
 
-        if len(nums) == 2:
-            if nums[0] > nums[1]:
-                temp = nums[0]
-                nums[0] = nums[1]
-                nums[1] = temp
-            return 
+    def quickSelect(self, nums, lo, hi, k):
+        pivot = nums[hi]
+        i = lo
 
-        pivot = len(nums) - 1
-
-        lm = 0
-        prevm = len(nums)-2
-
-        while lm < prevm:
-            if nums[lm] > nums[pivot]:
-                temp = nums[lm]
-                nums[lm] = nums[prevm]
-                nums[prevm] = nums[pivot]
-                nums[pivot] = temp
+        for j in range(lo,hi):
+            if nums[j] < pivot:
+                self.swap(nums, i, j)
+                i += 1
         
-                lm += 1
-                pivot -= 1
-                prevm -= 1
-        
-        if nums[pivot] < nums[prevm]:
-            temp  = nums[pivot]
-            nums[pivot] = nums[prevm]
-            nums[prevm] = temp
+        self.swap(nums, hi, i)
 
-            pivot -= 1
-        
-        left = nums[:pivot]
-        right = nums[pivot:]
+        if i > k:
+            return self.quickSelect(nums, lo, i-1, k)
 
-        self.quicksort(left)
-        self.quicksort(right)
-        return nums
+        elif i < k:
+            return self.quickSelect(nums, i+1, hi, k)
+        else:
+            return nums[i]
 
 
+    def swap(self, nums, idx1, idx2):
+        temp = nums[idx1]
+        nums[idx1] = nums[idx2]
+        nums[idx2] = temp
+        return
