@@ -2,6 +2,7 @@ import sys
 import heapq
 
 n = int(sys.stdin.readline())
+
 road_info = []
 for _ in range(n):
     road = list(map(int, sys.stdin.readline().split()))
@@ -11,8 +12,8 @@ d = int(sys.stdin.readline())
 roads = []
 for road in road_info:
     house, office = road
-    if abs(house - office) <= d:
-        road = sorted(road)
+    if abs(house - office) < d:
+        road.sort()
         roads.append(road)
 roads.sort(key=lambda x:x[1])
 
@@ -26,7 +27,17 @@ for road in roads:
             heapq.heappop(heap)
             if not heap:
                 break
-        heapq.heappush(heap, road)
-    answer = max(answer, len(heap))
 
-print(answer)
+
+
+
+
+
+
+
+
+
+
+
+
+

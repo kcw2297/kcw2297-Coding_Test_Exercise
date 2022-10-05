@@ -17,29 +17,6 @@ print(*answer)
 
 
 
-# import sys
-
-# count = int(sys.stdin.readline())
-
-# tower_list = list(map(int,sys.stdin.readline().split()))
-
-# result = []
-
-# for i in range(count-1,0,-1):
-#     for j in range(i-1,-1,-1):
-#         if tower_list[i] <= tower_list[j]:
-#             result.append(j+1)
-#             tower_list.pop()
-#             break
-
-#     if len(result) != count-i:
-#         result.append(0)
-
-# result.append(0)
-
-# for i in range(len(result)-1,-1,-1):
-#     print(result[i], end=' ')
-
 
 
 

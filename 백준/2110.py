@@ -27,9 +27,6 @@ def binary(arr, s, e):
     else:
         e = mid -1
     return binary(arr, s, e)
-    
-
-
 
 
 start = 1
