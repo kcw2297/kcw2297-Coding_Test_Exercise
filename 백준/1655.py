@@ -1,34 +1,30 @@
 
-    
-
 
 import sys
 import heapq
 
+
+
 N = int(sys.stdin.readline())
 
+leftheap = []
+rightheap = []
+answer = []
 for i in range(N):
-    num = int(sys.stdin.readline())
+    inputNum = int(sys.stdin.readline())
 
-    heap_l = []
-    heap_r = []
-
-    if len(heap_l) == len(heap_r):
-        heapq.heappush(heap_l, (-num, num))
+    if len(leftheap)  == len(rightheap):
+        heapq.heappush(leftheap, (-inputNum, inputNum))
     else:
-        heapq.heappush(heap_r, (num, num))
+        heapq.heappush(rightheap, (-inputNum, inputNum))
 
-    if heap_l[0][1] > heap_r[0][1]:
-        min = heapq.heappop()
-        min = heap_r[0][1]
-        max = heap_l[0][1]
-        heap_l[0][1] = min
-        heap_r[0][1] = max
+    if rightheap and leftheap[0][1] > rightheap[0][0]:
+        min = heapq.heappop(rightheap)[0]
+        max = heapq.heappop(leftheap)[1]
+        heapq.heappush(leftheap, (-min, min))
+        heapq.heappush(rightheap, (max, max))
 
-    
+    answer.append(leftheap[0][1])
 
-
-
-
-
-
+for j in answer:
+    print(j)

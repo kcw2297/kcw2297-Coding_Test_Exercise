@@ -17,6 +17,7 @@ for road in road_info:
         roads.append(road)
 roads.sort(key=lambda x:x[1])
 
+
 answer = 0
 heap = []
 for road in roads:
@@ -27,17 +28,10 @@ for road in roads:
             heapq.heappop(heap)
             if not heap:
                 break
+        heapq.heappush(heap, road)
+    answer = max(answer, len(heap))
 
-
-
-
-
-
-
-
-
-
-
+print(answer)
 
 
 

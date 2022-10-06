@@ -32,3 +32,4 @@ print(''.join(stack[:N-K]))
 
 
 
+
