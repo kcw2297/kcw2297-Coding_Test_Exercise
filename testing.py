@@ -1,39 +1,40 @@
-
-
-
 import sys
- 
-N = int(sys.stdin.readline().strip())
-tree = {}
- 
-for n in range(N):
-    root, left, right = sys.stdin.readline().strip().split()
-    tree[root] = [left, right]
- 
- 
-def preorder(root):
-    if root != '.':
-        print(root, end='')  # root
-        preorder(tree[root][0])  # left
-        preorder(tree[root][1])  # right
- 
- 
-def inorder(root):
-    if root != '.':
-        inorder(tree[root][0])  # left
-        print(root, end='')  # root
-        inorder(tree[root][1])  # right
- 
- 
-def postorder(root):
-    if root != '.':
-        postorder(tree[root][0])  # left
-        postorder(tree[root][1])  # right
-        print(root, end='')  # root
- 
- 
-preorder('A')
-print()
-inorder('A')
-print()
-postorder('A')
+from collections import deque
+input = sys.stdin.readline
+
+n, m = map(int, input().split())
+arr = []
+inDegree = [ 0 for i in range(32001)]
+graph = [[] for i in range(32001)]
+queue = deque()
+
+for i in range(m):
+    a, b = map(int, input().split())
+    arr.append([a, b])
+
+for a, b in arr:
+    inDegree[b] += 1
+    graph[a].append(b)
+
+for i in range(1, n + 1):
+    if inDegree[i] == 0:
+        queue.append(i)
+
+while queue:
+    student = queue.popleft()
+    #indegree가 0인 정점을 제거하고, 해당 정점이 참조하고있던 점들의 indegree를 감소시킨다.
+    for j in graph[student]:
+        inDegree[j] -= 1
+        if inDegree[j] == 0:
+            queue.append(j)
+    print(student, end = ' ')
+
+
+
+
+
+
+
+
+
+    

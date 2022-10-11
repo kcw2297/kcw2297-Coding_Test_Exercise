@@ -46,3 +46,4 @@ def solution(maps):
 
     answer = graph[-1][-1]
     return answer
+
