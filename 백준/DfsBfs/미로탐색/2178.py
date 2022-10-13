@@ -1,5 +1,5 @@
 from collections import deque
-from pydoc import visiblename
+
 
 N, M = map(int, input().split())
 
@@ -27,17 +27,18 @@ def bfs(x, y):
       ny = y + dy[i]
 
       # 위치가 벗어나면 안되기 때문에 조건 추가
-      if nx < 0 or nx >= N or ny < 0 or ny >= M:
-        continue
+      # if nx < 0 or nx >= N or ny < 0 or ny >= M:
+      #   continue
       
-      # 벽이므로 진행 불가
-      if graph[nx][ny] == 0:
-        continue
+      # # 벽이므로 진행 불가
+      # if graph[nx][ny] == 0:
+      #   continue
       
       # 벽이 아니므로 이동
-      if graph[nx][ny] == 1:
-        graph[nx][ny] = graph[x][y] + 1
-        queue.append((nx, ny))
+      if 0<= nx < N and 0<= ny < M:
+        if graph[nx][ny] == 1:
+          graph[nx][ny] = graph[x][y] + 1
+          queue.append((nx, ny))
   
   # 마지막 값에서 카운트 값을 뽑는다.
   return graph[N-1][M-1]

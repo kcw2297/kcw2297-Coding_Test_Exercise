@@ -11,7 +11,7 @@ for i in range(m):
     g[a].append((b,w))
 
 st, ed = map(int, input().split())
-dist = [10000000] * (n+1)
+dist = [10000000000000] * (n+1)
 
 def dijkstra(start):
     dist[start] = 0
@@ -23,11 +23,17 @@ def dijkstra(start):
             continue
 
         for dest, wei in g[cur]:
-            cost = dist[cur] + wei
+            cost = w + wei
             if dist[dest] > cost:
                 dist[dest] = cost
                 heapq.heappush(q, (cost,dest))
 
 dijkstra(st)
 print(dist[ed])
+
+
+
+
+
+
 
