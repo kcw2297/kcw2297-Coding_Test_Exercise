@@ -16,3 +16,9 @@ if min(dp[N]) == float('inf'):
     print(-1)
 else:
     print(min(dp[N]))
+
+
+
+
+
+
